@@ -17,6 +17,22 @@ module.exports = function(grunt) {
     config: config,
 
     pkg: grunt.file.readJSON('package.json'),
+    htmlmin: {
+      dist: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true,
+          minifyCSS: true,
+          minifiyJS: true,
+        },
+        files: [{
+          expand: true,
+          cwd: 'src',
+          src: ['**/*.ejs'],
+          dest: 'dist/'
+        }]
+      },
+    },
     jshint: {
       files: ['Gruntfile.js', '<%= config.src %>/**/*.js', 'test/<%= config.src %>/**/*.js'],
       options: {
@@ -79,7 +95,7 @@ module.exports = function(grunt) {
       target: {
         files: [{
           expand: true,
-          cwd: '<%= config.src %>/assets/images/',
+          cwd: '<%= config.src %>/images/',
           src: ['**/*.{png,jpg,gif}'],
           dest: '<%= config.dist %>/images/'
         }]
@@ -87,12 +103,16 @@ module.exports = function(grunt) {
     },
     copy: {
       fonts: {
-        src: '<%= config.src %>/assets/fonts/*',
-        dest: '<%= config.dist %>/assets/fonts/'
+        src: '<%= config.src %>/fonts/*',
+        dest: '<%= config.dist %>/fonts/'
       },
       etc: {
-        src: '<%= config.src %>/assets/etc/*/*',
-        dest: '<%= config.dist %>/assets/etc/'
+        src: '<%= config.src %>/etc/*/*',
+        dest: '<%= config.dist %>/etc/'
+      },
+      server: {
+        src: 'src/default.js',
+        dest: 'dist/default.js'
       }
     }  
   });
@@ -100,15 +120,19 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   grunt.registerTask('default', [
     'concat',
+    'htmlmin',
     'jshint',
     'uglify',
     'cssmin',
-    'imagemin'
+    'imagemin',
+    'copy'
   ]);
 
 };
