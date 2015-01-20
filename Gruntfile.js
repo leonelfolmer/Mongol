@@ -80,8 +80,8 @@ module.exports = function(grunt) {
     },
     copy: {
       fonts: {
-        src: '<%= config.src %>/fonts/*',
-        dest: '<%= config.dist %>/fonts/'
+        src: 'src/assets/fonts/*',
+        dest: 'dist/assets/fonts/'
       },
       server: {
         src: 'src/default.js',
