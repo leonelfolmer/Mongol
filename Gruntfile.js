@@ -6,8 +6,8 @@ module.exports = function(grunt) {
 
   // Configurable paths
   var config = {
-    src: 'src/assets',
-    dist: 'dist/assets'
+    src: 'src',
+    dist: 'dist'
   };
 
   // Project configuration.
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
       },
     },
     jshint: {
-      files: ['Gruntfile.js', '<%= config.src %>/**/*.js', 'test/<%= config.src %>/**/*.js'],
+      files: ['Gruntfile.js', '<%= config.src %>/assets/**/*.js', 'test/<%= config.src %>/assets/**/*.js'],
       options: {
         globals: {
           jQuery: true
@@ -46,8 +46,8 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           src: '**/*.js',
-          dest: '<%= config.dist %>/scripts',
-          cwd: '<%= config.src %>/scripts',
+          dest: '<%= config.dist %>/assets/scripts',
+          cwd: '<%= config.src %>/assets/scripts',
           ext: '.min.js'
         }]
       }
@@ -61,9 +61,9 @@ module.exports = function(grunt) {
       target: {
         files: [{
           expand: true,
-          cwd: '<%= config.src %>/styles',
+          cwd: '<%= config.src %>/assets/styles',
           src: ['*.css', '!*.min.css'],
-          dest: '<%= config.dist %>/styles',
+          dest: '<%= config.dist %>/assets/styles',
           ext: '.min.css'
         }]
       }
@@ -72,9 +72,9 @@ module.exports = function(grunt) {
       target: {
         files: [{
           expand: true,
-          cwd: '<%= config.src %>/images/',
+          cwd: '<%= config.src %>/assets/images/',
           src: ['**/*.{png,jpg,gif}'],
-          dest: '<%= config.dist %>/images/'
+          dest: '<%= config.dist %>/assets/images/'
         }]
       }
     },
